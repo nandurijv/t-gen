@@ -2,7 +2,7 @@ import { Button, Link, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import "./Enter.css";
 import Banner from "../SVGs/banner";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Login from "./Login";
 import Register from "./Register";
@@ -20,6 +20,7 @@ function Enter() {
             justifyContent="center"
             spacing={4}
           >
+            <AnimatePresence>
             <motion.div
               animate={{ scale: [null, 1.2, 1] }}
               transition={{
@@ -42,6 +43,7 @@ function Enter() {
             >
               <Banner type={svgType} />
             </motion.div>
+            </AnimatePresence>
             <Typography
               variant="h4"
               sx={{ textAlign: "center", fontFamily: "Ubuntu",marginTop:"2rem" }}
@@ -56,8 +58,9 @@ function Enter() {
           sx={{ width: "100%" }}
           alignItems="center"
           justifyContent="center"
+          spacing={4}
         >
-          <Stack alignItems="center" justifyContent="center" sx={{ width: "100%" }}>
+          <Stack alignItems="center" justifyContent="center" sx={{ width: "100%" }} spacing={4}>
             <Typography variant="h3" sx={{ fontFamily: "Ubuntu" }}>
             {formType === 0 ? "Login" : "Register"}
             </Typography>
