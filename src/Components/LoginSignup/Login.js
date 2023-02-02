@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { object, string } from "yup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -15,11 +16,25 @@ const validationSchema = object({
     .required("Must not be empty"),
   password: string().required("Please enter your password"),
 });
-const onSubmit = (values) => {
-  console.log(values);
-};
+
 function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlertMessage}) {
+  const navigate = useNavigate();
   const [showPassword,setShowPassword] = useState(false);
+  const onSubmit = (values) => {
+    fetch(`${process.env.REACT_APP_BASE_URL}/user/loginUser`,{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    }).then(res=>res.json()).then(data=>{
+      setAlert(data["success"])
+      setAlertType(data["success"]?"success":"error")
+      setAlertMessage(data["message"])
+      sessionStorage.setItem("token",data["token"])
+      navigate('/dashboard');
+    })
+  };
   const formik = useFormik({
     initialValues,
     validationSchema,

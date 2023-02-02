@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useFormik } from 'formik';
 import { motion } from "framer-motion";
 
-function Register({alert, alertType, alertMessage, setAlert, setAlertType, setAlertMessage}) {
+function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   
@@ -27,6 +27,7 @@ function Register({alert, alertType, alertMessage, setAlert, setAlertType, setAl
     },
     onSubmit: (values)=>{
       setLoading(true)
+      setAlert(false)
       fetch(`${process.env.REACT_APP_BASE_URL}/user/createUser`,{
         method:"POST",
         headers:{
@@ -35,7 +36,7 @@ function Register({alert, alertType, alertMessage, setAlert, setAlertType, setAl
         body:JSON.stringify(values)
       }).then(res=>res.json()).then(data=>{
         setLoading(false);
-        setAlert(data["success"])
+        setAlert(true)
         setAlertType(data["success"]?"success":"error")
         setAlertMessage(data["message"]);
       })
@@ -65,6 +66,13 @@ function Register({alert, alertType, alertMessage, setAlert, setAlertType, setAl
       return errors;
     }
   });
+  const resendMail = ()=>{
+    fetch(`${process.env.REACT_APP_BASE_URL}/user/resendMail`,{
+      method:"POST",
+      headers:{"Content-Type": "application/json"},
+      body:JSON.stringify(formik.values)
+    })
+  }
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
@@ -192,6 +200,7 @@ function Register({alert, alertType, alertMessage, setAlert, setAlertType, setAl
         </Button>
         </motion.div>
         {open && <Verify open={open} handleClose={handleClose} />}
+      {alertType==="success"?<Button variant="contained" color={alertType} onClick={resendMail}>Resend Mail</Button>:""}
       </Stack>
     </form>
   );
