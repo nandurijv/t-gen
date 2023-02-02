@@ -5,21 +5,23 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { motion } from "framer-motion";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import "./Nav.css";
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
   const matches = useMediaQuery("(min-width:800px)");
+  const navigate = useNavigate();
   return (
     <div className="nav">
       <Stack
         spacing={2}
-        direction={!matches?"column":"row"}
+        direction={!matches ? "column" : "row"}
         alignItems="center"
         justifyContent="space-between"
       >
         {/* logo and title */}
         <motion.div
           animate={{ scale: [null, 1.2] }}
-          transition={{duration:0.3, type:"easeOut"}}
+          transition={{ duration: 0.3, type: "easeOut" }}
           drag="x"
           dragConstraints={{ left: -5, right: 5 }}
         >
@@ -44,45 +46,55 @@ function Nav() {
         </motion.div>
 
         {/* buttons */}
-        <Stack direction={!matches?"column":"row"} spacing={2}>
-        <motion.div
-          whileHover={{
-            scale: [null, 1.05],
-          }}
-          whileTap={{
-            scale: 1,
-          }}
-        >
-          <Button
-            size="small"
-            variant="contained"
-            startIcon={<AutoStoriesIcon />}
-            color="warning"
-            disableElevation
-            disableRipple
-          >
-            Read the Docs
-          </Button>
-        </motion.div>
-        <motion.div
-          whileHover={{
-            scale: [null, 1.05],
-          }}
-          whileTap={{
-            scale: 1,
-          }}
-        >
-          <Button
-            size="small"
-            variant="contained"
-            startIcon={<GitHubIcon />}
+        <Stack direction={!matches ? "column" : "row"} spacing={2}>
+          {sessionStorage.getItem("token")&&<Button
             color="secondary"
-            disableElevation
-            disableRipple
+            variant="contained"
+            onClick={() => {
+              sessionStorage.clear();
+              navigate('/')
+            }}
           >
-            View on Github
-          </Button>
-        </motion.div>
+            Logout
+          </Button>}
+          <motion.div
+            whileHover={{
+              scale: [null, 1.05],
+            }}
+            whileTap={{
+              scale: 1,
+            }}
+          >
+            <Button
+              size="small"
+              variant="contained"
+              startIcon={<AutoStoriesIcon />}
+              color="warning"
+              disableElevation
+              disableRipple
+            >
+              Read the Docs
+            </Button>
+          </motion.div>
+          <motion.div
+            whileHover={{
+              scale: [null, 1.05],
+            }}
+            whileTap={{
+              scale: 1,
+            }}
+          >
+            <Button
+              size="small"
+              variant="contained"
+              startIcon={<GitHubIcon />}
+              color="secondary"
+              disableElevation
+              disableRipple
+            >
+              View on Github
+            </Button>
+          </motion.div>
         </Stack>
       </Stack>
     </div>

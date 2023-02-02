@@ -1,14 +1,19 @@
 import { Alert, Button, Link, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import CancelIcon from '@mui/icons-material/Cancel';
+import React, { useEffect, useState } from "react";
 import "./Enter.css";
 import Banner from "../SVGs/banner";
 import { AnimatePresence, motion } from "framer-motion";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Login from "./Login";
 import Register from "./Register";
-import { Cancel } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 function Enter() {
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(sessionStorage.getItem('token')){
+      navigate('/dashboard');
+    }
+  })
   const [svgType, setSvgType] = useState(1);
   const [alert,setAlert] = useState(0)
   const [alertType,setAlertType] = useState("");

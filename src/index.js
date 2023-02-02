@@ -1,31 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import ErrorPage from './ErrorPage';
-import Nav from './Components/Nav/Nav';
-import Dashboard from './Components/Dashboard/Dashboard';
+import ErrorPage from "./ErrorPage";
+import Nav from "./Components/Nav/Nav";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
-    errorElement:<ErrorPage/>
-  },{
-    path: "/dashboard",
-    element:<Dashboard/>
-  }
+    element: <App />,
+    errorElement: <ErrorPage />
+  },
 ]);
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <div className="App">
-    <Nav/>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </div>
   </React.StrictMode>
 );
