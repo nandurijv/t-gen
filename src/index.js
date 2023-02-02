@@ -9,13 +9,15 @@ import {
 } from "react-router-dom";
 import ErrorPage from './ErrorPage';
 import Nav from './Components/Nav/Nav';
+import Dashboard from './Components/Dashboard/Dashboard';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     errorElement:<ErrorPage/>
   },{
-
+    path: "/dashboard",
+    element:<Dashboard/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));

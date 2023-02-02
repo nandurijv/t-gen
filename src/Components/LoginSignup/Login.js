@@ -21,6 +21,7 @@ function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlert
   const navigate = useNavigate();
   const [showPassword,setShowPassword] = useState(false);
   const onSubmit = (values) => {
+    try{
     fetch(`${process.env.REACT_APP_BASE_URL}/user/loginUser`,{
       method:"POST",
       headers:{
@@ -34,7 +35,11 @@ function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlert
       sessionStorage.setItem("token",data["token"])
       navigate('/dashboard');
     })
-  };
+  }catch(err){
+    setAlert(true)
+      setAlertType("error")
+      setAlertMessage("Internal Error Occurred. Please try again later.")
+  }};
   const formik = useFormik({
     initialValues,
     validationSchema,
