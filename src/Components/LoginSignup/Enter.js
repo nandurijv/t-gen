@@ -1,4 +1,4 @@
-import { Button, Link, Stack, Typography } from "@mui/material";
+import { Alert, Link, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import "./Enter.css";
 import Banner from "../SVGs/banner";
@@ -8,6 +8,9 @@ import Login from "./Login";
 import Register from "./Register";
 function Enter() {
   const [svgType, setSvgType] = useState(1);
+  const [alert,setAlert] = useState(0)
+  const [alertType,setAlertType] = useState("");
+  const [alertMessage,setAlertMessage] = useState("");
   const [formType, setFormType] = useState(0);
   const matches = useMediaQuery("(min-width:800px)");
   return (
@@ -64,8 +67,9 @@ function Enter() {
             <Typography variant="h3" sx={{ fontFamily: "Ubuntu" }}>
             {formType === 0 ? "Login" : "Register"}
             </Typography>
-            {formType === 0 ? <Login /> : <Register />}
+            {formType === 0 ? <Login alert={alert} setAlert={setAlert} alertType={alertType} setAlertType={setAlertType} alertMessage={alertMessage} setAlertMessage={setAlertMessage}/> : <Register alert={alert} setAlert={setAlert} alertType={alertType} setAlertType={setAlertType} alertMessage={alertMessage} setAlertMessage={setAlertMessage}/>}
           </Stack>
+          {alert?<Alert severity={alertType}>{alertMessage}</Alert>:""}
           <Link
             href="#"
             onClick={() => {

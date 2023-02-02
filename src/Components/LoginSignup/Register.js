@@ -12,9 +12,10 @@ import { useState } from "react";
 import { useFormik } from 'formik';
 import { motion } from "framer-motion";
 
-function Register() {
+function Register({alert, alertType, alertMessage, setAlert, setAlertType, setAlertMessage}) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const formik = useFormik({
@@ -25,7 +26,19 @@ function Register() {
       confirm_password:""
     },
     onSubmit: (values)=>{
-
+      setLoading(true)
+      fetch(`${process.env.REACT_APP_BASE_URL}/user/createUser`,{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json"
+        },
+        body:JSON.stringify(values)
+      }).then(res=>res.json()).then(data=>{
+        setLoading(false);
+        setAlert(data["success"])
+        setAlertType(data["success"]?"success":"error")
+        setAlertMessage(data["message"]);
+      })
     },
     validate:({name,email,password,confirm_password})=>{
       let errors ={}
@@ -77,8 +90,8 @@ function Register() {
       >
         <TextField
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
+            endAdornment: (
+              <InputAdornment position="end">
                 <IconButton>
                   <AccountCircleIcon />
                 </IconButton>
@@ -96,8 +109,8 @@ function Register() {
         />
         <TextField
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
+            endAdornment: (
+              <InputAdornment position="end">
                 <IconButton>
                   <EmailIcon />
                 </IconButton>
@@ -168,11 +181,11 @@ function Register() {
           variant="contained"
           disableElevation
           color="secondary"
-          onClick={handleOpen}
           sx={{paddingLeft:"0.8rem",paddingRight:"0.8rem"}}
+          onClick={formik.handleSubmit}
         >
           {loading ? (
-            <CircularProgress size={25} sx={{ color: "white" }} />
+            <CircularProgress size={20} sx={{ color: "white" }} />
           ) : (
             "Submit"
           )}
