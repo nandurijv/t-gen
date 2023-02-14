@@ -5,6 +5,7 @@ import { object, string } from "yup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
+import { EmailOutlined } from "@mui/icons-material";
 
 const initialValues = {
   email: "",
@@ -17,7 +18,7 @@ const validationSchema = object({
   password: string().required("Please enter your password"),
 });
 
-function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlertMessage}) {
+function Login({setAlert, setAlertType, setAlertMessage}) {
   const navigate = useNavigate();
   const [showPassword,setShowPassword] = useState(false);
   const onSubmit = (values) => {
@@ -29,11 +30,13 @@ function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlert
       },
       body: JSON.stringify(values)
     }).then(res=>res.json()).then(data=>{
-      setAlert(data["success"])
+      setAlert(true)
       setAlertType(data["success"]?"success":"error")
       setAlertMessage(data["message"])
-      sessionStorage.setItem("token",data["token"])
-      navigate('/dashboard');
+      if(data["success"]) {
+        sessionStorage.setItem("token",data["token"])
+        navigate('dashboard');
+      }
     })
   }catch(err){
     setAlert(true)
@@ -52,11 +55,21 @@ function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlert
     event.preventDefault();
   };
   return (
-      <form  style={{ width: "100%" }} action="/" onSubmit={formik.handleSubmit}>
-        <Stack spacing={2} width="100%" alignItems="center" justifyContent="center">
+      <form  style={{ width: "100%",display: "flex",justifyContent: "center",alignItems: "center"}} action="/" onSubmit={formik.handleSubmit}>
+        <Stack spacing={2} width="80%" alignItems="center" justifyContent="center">
         <TextField
           error={formik.touched.email && formik.errors.email}
           helperText={formik.errors.email}
+          InputProps={{
+            endAdornment:(
+              <InputAdornment position="end">
+                <IconButton >
+                  <EmailOutlined/>
+                </IconButton>
+                </InputAdornment>
+                ),
+                style:{backgroundColor:"white"}
+          }}
           id="name"
           label="Email Address"
           name="name"
@@ -76,7 +89,7 @@ function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlert
           {...formik.getFieldProps("password")}
           InputProps={{
             endAdornment:(
-              <InputAdornment position="end">
+              <InputAdornment position="end" >
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
@@ -85,10 +98,11 @@ function Login({alert, alertType, alertMessage, setAlert, setAlertType, setAlert
                   {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
                 </InputAdornment>
-                )
+                ),
+                style:{backgroundColor:"white"}
           }}
         />
-        <Button disabled={!formik.isValid} type="submit" variant="contained" disableElevation>Login</Button>
+        <Button style={{color:formik.isValid?"":"rgb(255,255,255,0.5)"}}disabled={!formik.isValid} type="submit" color="secondary" variant="contained" disableElevation>Login</Button>
         </Stack>
       </form>
   );

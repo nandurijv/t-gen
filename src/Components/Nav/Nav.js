@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, ButtonGroup, Stack, Typography } from "@mui/material";
 import React from "react";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -37,6 +37,7 @@ function Nav() {
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
+                  sx={{marginLeft:"1rem"}}
                 >
                   <Typography variant="h5">Shedge</Typography>
                 </Stack>
@@ -47,16 +48,35 @@ function Nav() {
 
         {/* buttons */}
         <Stack direction={!matches ? "column" : "row"} spacing={2}>
-          {sessionStorage.getItem("token")&&<Button
-            color="secondary"
+          {sessionStorage.getItem("token") &&
+          <ButtonGroup>
+            <Button
+            color="warning"
             variant="contained"
             onClick={() => {
               sessionStorage.clear();
               navigate('/')
             }}
+            size="small"
+            disableElevation
+            disableRipple
           >
             Logout
-          </Button>}
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={() => {
+              navigate('/dashboard')
+            }}
+            size="small"
+            disableElevation
+          >
+            Go To Dashboard
+          </Button>
+          </ButtonGroup>
+          }
+          {!sessionStorage.getItem("token")&&<>
           <motion.div
             whileHover={{
               scale: [null, 1.05],
@@ -94,7 +114,7 @@ function Nav() {
             >
               View on Github
             </Button>
-          </motion.div>
+          </motion.div></>}
         </Stack>
       </Stack>
     </div>

@@ -1,4 +1,4 @@
-import { TextField, InputAdornment, Button } from "@mui/material";
+import { TextField, InputAdornment, Button, ButtonGroup } from "@mui/material";
 import { Stack } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -7,17 +7,16 @@ import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import CircularProgress from "@mui/material/CircularProgress";
-import Verify from "./Verify.js";
 import { useState } from "react";
 import { useFormik } from 'formik';
 import { motion } from "framer-motion";
 
-function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
+function Register({alert,alertType, setAlert, setAlertType, setAlertMessage}) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const formik = useFormik({
     initialValues:{
       name:"",
@@ -67,10 +66,16 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
     }
   });
   const resendMail = ()=>{
+    setLoading2(true)
     fetch(`${process.env.REACT_APP_BASE_URL}/user/resendMail`,{
       method:"POST",
       headers:{"Content-Type": "application/json"},
       body:JSON.stringify(formik.values)
+    }).then(res=>res.json()).then(data=>{
+      setLoading2(false);
+        setAlert(true)
+        setAlertType(data["success"]?"success":"error")
+        setAlertMessage(data["message"]);
     })
   }
   const handleClickShowPassword = () => {
@@ -82,14 +87,9 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
   return (
     <form style={{ width: "100%" }} action="/" onSubmit={formik.handleSubmit}>
+      <>
       <Stack
         sx={{ width: "100%" }}
         alignItems="center"
@@ -104,7 +104,7 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
                   <AccountCircleIcon />
                 </IconButton>
               </InputAdornment>
-            ),
+            ),style:{backgroundColor:"white"}
           }}
           error={formik.touched.name&&formik.errors.name}
           helperText={formik.errors.name}
@@ -123,7 +123,7 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
                   <EmailIcon />
                 </IconButton>
               </InputAdornment>
-            ),
+            ),style:{backgroundColor:"white"}
           }}
           error={formik.touched.email&&formik.errors.email}
           helperText={formik.errors.email}
@@ -147,7 +147,7 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
                   {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
-            ),
+            ),style:{backgroundColor:"white"}
           }}
           error={formik.touched.password&&formik.errors.password}
           helperText={formik.errors.password}
@@ -171,7 +171,7 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
                   {showPassword2 ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
-            ),
+            ),style:{backgroundColor:"white"}
           }}
           error={formik.touched.confirm_password&&formik.errors.confirm_password}
           helperText={formik.errors.confirm_password}
@@ -183,6 +183,7 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
           {... formik.getFieldProps('confirm_password')}
         />
         <motion.div whileHover={{scale:1.2}}>
+        <ButtonGroup size="small">
         <Button
         disabled = {!formik.isValid?true:false}
         type="submit"
@@ -190,6 +191,7 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
           disableElevation
           color="secondary"
           sx={{paddingLeft:"0.8rem",paddingRight:"0.8rem"}}
+          style={{color:formik.isValid?"":"rgb(255,255,255,0.5)"}}
           onClick={formik.handleSubmit}
         >
           {loading ? (
@@ -198,10 +200,16 @@ function Register({alertType, setAlert, setAlertType, setAlertMessage}) {
             "Submit"
           )}
         </Button>
+        {alert?<Button variant="contained" disableElevation size="small" color="warning" onClick={resendMail}>{loading ? (
+            <CircularProgress size={20} sx={{ color: "white" }} />
+          ) : (
+            "Resend Mail"
+          )}</Button>:""}
+        </ButtonGroup>
         </motion.div>
-        {open && <Verify open={open} handleClose={handleClose} />}
-      {alertType==="success"?<Button variant="contained" color={alertType} onClick={resendMail}>Resend Mail</Button>:""}
+      
       </Stack>
+      </>
     </form>
   );
 }

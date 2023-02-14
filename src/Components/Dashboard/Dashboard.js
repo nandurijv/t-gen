@@ -1,9 +1,7 @@
-import { Button, Stack } from '@mui/material'
+import { Stack } from '@mui/material'
 import React, { useEffect } from 'react'
-import Svg1 from '../SVGs/Svg1'
-import Svg2 from '../SVGs/Svg2'
-import Svg3 from '../SVGs/Svg3'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import Nav from '../Nav/Nav'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -11,23 +9,17 @@ function Dashboard() {
     if(!sessionStorage.getItem("token")){
       navigate('/');
     }
-  })
+  },[navigate])
   
   return (
-    <Stack sx={{width:"100%"}} direction="row">
-      <Stack sx={{width:"100%",minHeight:"80vh",padding:"2rem"}} alignItems="center" justifyContent="center" spacing={4}>
-        <Svg1/>
-        <Button variant="contained" color="secondary" onClick={()=>{navigate('generateSchedule')}}disableRipple disableElevation>Generate Schedule</Button>
-      </Stack>
-      <Stack sx={{width:"100%",minHeight:"80vh"}} alignItems="center" justifyContent="center" spacing={4}>
-        <Svg2/>
-        <Button variant="contained" color="secondary" disableRipple disableElevation>View Schedules</Button>
-      </Stack>
-      <Stack sx={{width:"100%",minHeight:"80vh"}} alignItems="center" justifyContent="center" spacing={4}>
-        <Svg3/>
-        <Button variant="contained" color="secondary" disableRipple disableElevation>Reminders</Button>
-      </Stack>
+    <>
+    <Nav/>
+    <Stack direction="row"sx={{width:"100%",textAlign:"center", height:"10vh", alignItems:"center",justifyContent:"space-around"}}>
+      <p>Here comes some fine details of the user</p>
+      <p>Here comes some fine details of the user</p>
     </Stack>
+    <Outlet/>
+    </>
   )
 }
 

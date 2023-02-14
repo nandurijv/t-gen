@@ -1,4 +1,15 @@
 .entry{
-   min-height:80vh;
+   min-height:100vh;
    padding:2rem;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   background:url('../../../public/bg.jpeg');
+   background-repeat:repeat;
+   background-size:cover;
+   background-position-x:50vw ;
+   width:100%;
+}
+.entry h3{
+   color:white;
 }
