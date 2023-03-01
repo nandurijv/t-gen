@@ -1,15 +1,28 @@
 .entry{
-   min-height:100vh;
+   height:100%;
    padding:2rem;
    display:flex;
    align-items:center;
    justify-content:center;
-   background:url('../../../public/bg.jpeg');
+   /* background:url('../../../public/bg.jpeg');
    background-repeat:repeat;
    background-size:cover;
-   background-position-x:50vw ;
+   background-position-x:50vw ; */
    width:100%;
 }
-.entry h3{
-   color:white;
+.form{
+   border-radius:2rem;
+   margin:0;
+   padding-top:4rem;
+   color:black;
+}
+
+@media screen and (max-width:600px) {
+   .entry{
+      padding:0 !important;
+   }
+   .entry > div{
+      padding:10px;
+
+   }
 }

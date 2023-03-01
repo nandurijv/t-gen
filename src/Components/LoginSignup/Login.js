@@ -34,7 +34,10 @@ function Login({setAlert, setAlertType, setAlertMessage}) {
       setAlertType(data["success"]?"success":"error")
       setAlertMessage(data["message"])
       if(data["success"]) {
-        sessionStorage.setItem("token",data["token"])
+        console.log(data);
+        sessionStorage.setItem("token",data["token"]);
+        sessionStorage.setItem("user_name",data["name"]);
+        sessionStorage.setItem("user_email",data["email"]);
         navigate('dashboard');
       }
     })
@@ -48,8 +51,11 @@ function Login({setAlert, setAlertType, setAlertMessage}) {
     validationSchema,
     onSubmit: onSubmit,
   });
-  const handleClickShowPassword = () => {
+  const handleClickShowPassword = (event) => {
     setShowPassword((prev) => !prev);
+    let current = event.target.style.color;
+    event.target.style.color = current==="purple"?"black":"purple";
+    console.log(event.target.style.color)
   };
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -63,7 +69,7 @@ function Login({setAlert, setAlertType, setAlertMessage}) {
           InputProps={{
             endAdornment:(
               <InputAdornment position="end">
-                <IconButton >
+                <IconButton onClick={(event)=>{event.target.style.color="purple"}}>
                   <EmailOutlined/>
                 </IconButton>
                 </InputAdornment>
@@ -74,7 +80,7 @@ function Login({setAlert, setAlertType, setAlertMessage}) {
           label="Email Address"
           name="name"
           variant="outlined"
-          sx={{ width: "60%" }}
+          sx={{ width: "80%" }}
           {...formik.getFieldProps("email")}
         />
         <TextField
@@ -85,7 +91,7 @@ function Login({setAlert, setAlertType, setAlertMessage}) {
           label="Password"
           name="password"
           variant="outlined"
-          sx={{ width: "60%" }}
+          sx={{ width: "80%" }}
           {...formik.getFieldProps("password")}
           InputProps={{
             endAdornment:(
