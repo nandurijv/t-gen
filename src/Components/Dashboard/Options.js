@@ -15,16 +15,7 @@ function Options() {
         <Svg1/>
         </motion.div>
         <Button variant="contained" color="secondary" onClick={()=>{navigate('generateSchedule')}}disableRipple disableElevation>Generate Schedule</Button>
-      </Stack>
-      <Stack sx={{width:"100%",minHeight:"70vh"}} alignItems="center" justifyContent="center" spacing={4}>
-        <Svg2/>
-        <Button variant="contained" color="secondary" disableRipple disableElevation>View Schedules</Button>
-      </Stack>
-      <Stack sx={{width:"100%",minHeight:"70vh"}} alignItems="center" justifyContent="center" spacing={4}>
-        <Svg3/>
-        <Button variant="contained" color="secondary" disableRipple disableElevation>Reminders</Button>
-      </Stack>
-      
+      </Stack>      
     </Stack>
   )
 }
