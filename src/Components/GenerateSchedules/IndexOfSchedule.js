@@ -9,7 +9,9 @@ function IndexOfSchedule() {
   const [act,setAct] = useState(0);
   const [gen,setGen] = useState(0);
   const [see,setSee] = useState(0);
-  const [payload, setPayload] = useState({});
+  const [payload, setPayload] = useState({
+    "userID": sessionStorage.getItem("userID")
+  });
   return (
     <Stack direction="row" justifyContent="center" gap={2} alignItems="center" mt={4}>
       <Stack
@@ -19,7 +21,7 @@ function IndexOfSchedule() {
         width="100%"
       >
         {<Typography variant="h3">Rules {itemNumber}</Typography>}
-        <ListItem itemNumber={itemNumber} setPayload={setPayload} setInt={setInt} setAct={setAct} setGen={setGen} setSee={setSee}/>
+        <ListItem itemNumber={itemNumber} setItemNumber={setItemNumber} setPayload={setPayload} setInt={setInt} setAct={setAct} setGen={setGen} setSee={setSee}/>
       </Stack>
       <Stack
         id="actions"

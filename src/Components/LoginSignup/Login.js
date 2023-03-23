@@ -35,6 +35,7 @@ function Login({setAlert, setAlertType, setAlertMessage}) {
       setAlertMessage(data["message"])
       if(data["success"]) {
         sessionStorage.setItem("token",data["token"])
+        sessionStorage.setItem("userID",data["userID"])
         navigate('dashboard');
       }
     })
