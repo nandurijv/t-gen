@@ -83,6 +83,7 @@ function Enter() {
           )}
 
           <Stack
+          className="form"
             sx={{ width: "100%", height: "100%" }}
             alignItems="center"
             justifyContent="space-around"
@@ -92,6 +93,7 @@ function Enter() {
               {formType === 0 ? "Login" : "Register"}
             </Typography>
             <Stack
+            
               alignItems="center"
               justifyContent="center"
               sx={{ width: "100%", height: "100%"}}
@@ -116,6 +118,7 @@ function Enter() {
               )}
               {formType === 1 && (
                 <motion.div
+                
                   initial={{ x: 300, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: -300, opacity: 0 }}
@@ -140,7 +143,7 @@ function Enter() {
               }}
               variant="filled"
               disableRipple
-              sx={{color:"white",borderColor:"black",'&:hover':{borderColor:"#ddd",textDecoration:"underline"}}}
+              sx={{backgroundColor:"",borderColor:"black",'&:hover':{borderColor:"#ddd",textDecoration:"underline"}}}
             >
               {formType === 0 ? "New to Schedge?" : "Already have an account?"}
             </Button>
