@@ -14,21 +14,6 @@ function Dashboard() {
   return (
     <>
     <Nav/>
-    <Stack direction="row"sx={{width:"100%",textAlign:"center", height:"10vh", alignItems:"center",justifyContent:"space-around"}}>
-      {
-      sessionStorage.getItem("token") 
-      &&
-      <>
-      <p>{sessionStorage.getItem("user_name")}</p>
-      <p>{sessionStorage.getItem("user_email")}</p>
-      </>}
-      {
-      !sessionStorage.getItem("token") 
-      &&
-      <>
-      <p style={{color:"red"}}>Error Fetching Data</p>
-      </>}
-    </Stack>
     <Outlet/>
     </>
   )

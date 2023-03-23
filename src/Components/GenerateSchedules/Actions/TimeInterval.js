@@ -15,7 +15,7 @@ function TimeInterval({ setItemNumber, setInt, setPayload }) {
   }
   return (
     <>
-      <Stack direction="row" gap={4} mt={4} mb={4} alignItems="center" w="50%" justifyContent="center">
+      <Stack id="interval" direction="row" gap={4} mt={4} mb={4} alignItems="center" w="50%" justifyContent="center">
         <Stack gap={2} alignItems="center" justifyContent="center">
           <label htmlFor="start">Start Time</label>
           <Stack direction="row" justifyContent="center" alignItems="center" gap={2}><input type="text" name="start" id="start" value={start} placeholder="6"vautofocus onChange={(e)=>{setStart(e.target.value)}} /> HRS</Stack>

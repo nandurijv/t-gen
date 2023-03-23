@@ -9,8 +9,8 @@ import ErrorPage from "./ErrorPage";
 import Enter from "./Components/LoginSignup/Enter";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Options from "./Components/Dashboard/Options";
-import MakeTags from "./Components/TagGenerator/MakeTags";
 import IndexOfSchedule from "./Components/GenerateSchedules/IndexOfSchedule";
+import Tags from "./Components/GenerateSchedules/Actions/Tags";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
     <Route path="/dashboard" element={<Dashboard />} errorElement={<ErrorPage/>}>
       <Route path="" element={<Options/>}/>
       <Route path="generateSchedule" element={<IndexOfSchedule/>}/>
-      <Route path="generateTags" element={<MakeTags/>}/>
+      <Route path="generateTags" element={<Tags/>}/>
     </Route>
     </>
   )

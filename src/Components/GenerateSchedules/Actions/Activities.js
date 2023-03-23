@@ -1,7 +1,9 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 function Activities({ setItemNumber, setPayload }) {
+  const [activities,setActivities] = useState([])
+  
   return (
     <>
       <div
