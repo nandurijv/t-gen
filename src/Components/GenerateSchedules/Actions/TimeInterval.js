@@ -12,7 +12,7 @@ function TimeInterval({ setItemNumber, setInt, setPayload }) {
     setPayload((prev) => {
       return {
         ...prev,
-        intereval_start: start,
+        interval_start: start,
         interval_end: end,
         slot_dur: dur,
       };

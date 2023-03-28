@@ -2,9 +2,12 @@ input{
     outline:none;
     font-size:1.2rem;
     padding:1rem;
-    /* padding-left:1rem; */
     border-radius:2rem;
+    border:1px solid black;
+    box-shadow:2px solid purple;
     width:100%;
+    font-family: "Poppins";
+    font-weight:600;
 }
 input[type="number"]{
     width:50% !important;
@@ -13,10 +16,11 @@ input[type="number"]{
 }
 .tag #name{
     text-align: center;
+    
 }
 .tag input{
     border:2px solid gray;
-    width:100%;
+    width:50% !important;
     height:50px;
     font-family:'Poppins';
     font-weight:600;

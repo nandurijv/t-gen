@@ -1,17 +1,37 @@
-import { Button } from '@mui/material'
-import React from 'react'
+import { Button } from "@mui/material";
+import React, { useState } from "react";
 
-function Generate({setItemNumber}) {
+function Generate({ setItemNumber, payload }) {
+  const [loading,setLoading] = useState(false);
+  const handleGen = async () => {
+    setLoading(true);
+    fetch(`${process.env.REACT_APP_BASE_URL}/user/postSchedule`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
+      body: JSON.stringify(payload),
+    }).then(res=>res.json()).then(data=>{
+      console.log(data);
+      setLoading(false);
+      sessionStorage.setItem("schedule",data);
+      setItemNumber((prev) => {
+        return (prev + 1) % 4;
+      });
+    }).catch(err => console.log(err))
+  };
   return (
     <>
-      <div>Schedule</div>
-      <Button onClick={()=>{setItemNumber((prev) => {
-            return (prev + 1) % 4;
-          });}}>
-        Generate Shcedule
-      </Button>
+    {loading && "Loading.... Please Wait"}
+      {!loading && <Button
+        variant="contained"
+        onClick={handleGen}
+      >
+        Generate Schedule
+      </Button>}
     </>
-  )
+  );
 }
 
-export default Generate
+export default Generate;
