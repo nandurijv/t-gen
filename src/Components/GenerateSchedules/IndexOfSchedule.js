@@ -28,19 +28,19 @@ function IndexOfSchedule() {
         justifyContent="center"
         alignItems="center"
         width="fit-content"
-        p={4}
+        p={2}
         sx={{position:"absolute",left:0,top:"0%",height:"100vh",color:"white",backgroundColor:"purple",zIndex:0}}
       >
         <Typography variant="h3">Actions</Typography>
         <Stack id="action-list" gap={4} mt={4} justifyContent="center" alignItems="center">
             <Stack direction="row" gap={2}>
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={int?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>0)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Set Your Time Interval</Button></Typography>
+              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><Button endIcon={<DoneAllIcon id="tick" color={int?"secondary":"gray"}/>} onClick={()=>{setItemNumber(prev=>0)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Set Your Time Interval</Button></Typography>
             </Stack>
             <Stack direction="row" gap={2} >
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={act?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>1)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Set Your Activity List</Button></Typography>
+              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><Button endIcon={<DoneAllIcon id="tick" color={act?"secondary":"gray"}/>}onClick={()=>{setItemNumber(prev=>1)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Set Your Activity List</Button></Typography>
             </Stack>
             <Stack direction="row" gap={2} >
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={gen?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>2)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Generate Your Schedule!</Button></Typography>
+              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><Button endIcon={<DoneAllIcon id="tick" color={gen?"secondary":"gray"}/>} onClick={()=>{setItemNumber(prev=>2)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Generate Your Schedule!</Button></Typography>
             </Stack>
         </Stack>
       </Stack>
