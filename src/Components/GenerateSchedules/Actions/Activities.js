@@ -1,20 +1,18 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import React, { useState } from "react";
 
 function Activities({ setItemNumber, setPayload }) {
   const [activities,setActivities] = useState([])
-  
+  const handleActivity = ()=>{
+
+  }
   return (
-    <>
-      <div
-        onClick={() => {
-          setPayload((prev) => {
-            return { ...prev };
-          });
-        }}
-      >
-        Activities
-      </div>
+    <Stack gap={4} mt={2} alignItems="left" justifyContent="center">
+      <Stack gap={2}>
+        <label htmlFor="name">Activity Name</label>
+        <input type="text" id="name" placeholder="Activity Name" name="name"/>
+      </Stack>
+      <input type="checkbox" id="something"/>
       <Button
         disableElevation
         variant="contained"
@@ -27,9 +25,9 @@ function Activities({ setItemNumber, setPayload }) {
           });
         }}
       >
-        Set
+        Go To Next Step
       </Button>
-    </>
+    </Stack>
   );
 }
 

@@ -13,7 +13,8 @@ function Tags() {
     fetch(`${process.env.REACT_APP_BASE_URL}/user/createTag`,{
         method: 'POST',
         headers:{
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("token") 
         },
         body:JSON.stringify({userID: sessionStorage.getItem("userID"),name:name, start_time:start, end_time:end})
     }).then(res=>res.json()).then((data)=>{
@@ -26,8 +27,8 @@ function Tags() {
   };
   return (
     <Stack gap={4} direction="row" alignItems="center" justifyContent="center" minHeight="90vh">
-      <Stack p={4} alignItems="center" justifyContent="center" gap={4} width="100%">
-      <Typography variant="h4">Generate Your Own Tags</Typography>
+      <Stack p={4} alignItems="left" justifyContent="center" gap={4} width="100%">
+      <Typography variant="h1">Generate Your Own Tags</Typography>
       <Stack gap={4} width="100%">
         <Stack gap={2} className="tag" alignItems="center" justifyContent="center">
           <label htmlFor="name">Name</label>
@@ -111,6 +112,7 @@ function Tags() {
         </Alert>}
       </Stack>
       <Stack width="100%" height="90vh" alignItems="center" justifyContent="center">
+        <Typography variant="h2">Your Tags</Typography>
         <TagsList/>
       </Stack>
     </Stack>

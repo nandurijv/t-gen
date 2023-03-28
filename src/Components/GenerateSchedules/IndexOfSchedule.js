@@ -18,8 +18,8 @@ function IndexOfSchedule() {
         id="rules"
         justifyContent="center"
         alignItems="center"
-        width="50%"
-        sx={{position:"absolute",left:"40vw",top:"10%",height:"100vh"}}
+        width="70%"
+        sx={{position:"absolute",left:"30vw",top:"10%",height:"90vh"}}
       >
         <ListItem itemNumber={itemNumber} setItemNumber={setItemNumber} setPayload={setPayload} setInt={setInt} setAct={setAct} setGen={setGen} setSee={setSee}/>
       </Stack>
