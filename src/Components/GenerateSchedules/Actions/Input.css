@@ -5,7 +5,7 @@ input{
     border-radius:2rem;
 }
 input[type="number"]{
-    width:100% !important;
+    width:50% !important;
     height:50px;
     font-size:2rem;
 }

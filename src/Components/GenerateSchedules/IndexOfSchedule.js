@@ -18,32 +18,30 @@ function IndexOfSchedule() {
         id="rules"
         justifyContent="center"
         alignItems="center"
-        width="100%"
+        width="50%"
+        sx={{position:"absolute",left:"40vw",top:"10%",height:"100vh"}}
       >
-        {<Typography variant="h3">Rules {itemNumber}</Typography>}
         <ListItem itemNumber={itemNumber} setItemNumber={setItemNumber} setPayload={setPayload} setInt={setInt} setAct={setAct} setGen={setGen} setSee={setSee}/>
       </Stack>
       <Stack
         id="actions"
         justifyContent="center"
         alignItems="center"
-        width="100%"
+        width="fit-content"
+        p={4}
+        sx={{position:"absolute",left:0,top:"0%",height:"100vh",color:"white",backgroundColor:"purple",zIndex:0}}
       >
         <Typography variant="h3">Actions</Typography>
-        <Stack id="action-list" gap={4} mt={4} justifyContent="center" alignItems="left">
-            <Stack direction="row" gap={2} >
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={int?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>0)}} sx={{marginLeft:4}} variant="contained">Set Your Time Interval</Button></Typography>
+        <Stack id="action-list" gap={4} mt={4} justifyContent="center" alignItems="center">
+            <Stack direction="row" gap={2}>
+              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={int?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>0)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Set Your Time Interval</Button></Typography>
             </Stack>
             <Stack direction="row" gap={2} >
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={act?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>1)}} sx={{marginLeft:4}} variant="contained">Set Your Activity List</Button></Typography>
+              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={act?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>1)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Set Your Activity List</Button></Typography>
             </Stack>
             <Stack direction="row" gap={2} >
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={gen?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>2)}} sx={{marginLeft:4}} variant="contained">Generate Your Schedule!</Button></Typography>
+              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><DoneAllIcon id="tick" color={gen?"secondary":"gray"}/><Button onClick={()=>{setItemNumber(prev=>2)}} sx={{marginLeft:4,width:"300px"}} variant="contained">Generate Your Schedule!</Button></Typography>
             </Stack>
-            <Stack direction="row" gap={2} >
-              <Typography justifyContent="flex-start" alignItems="center" display="flex" variant="h5"><Button onClick={()=>{setItemNumber(prev=>3)}} sx={{marginLeft:4}} disabled={!see} variant="contained">Well Done! See Your Generated Schedule Here</Button></Typography>
-            </Stack>
-            {JSON.stringify(payload)}
         </Stack>
       </Stack>
     </Stack>

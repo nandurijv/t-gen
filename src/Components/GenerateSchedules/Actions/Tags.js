@@ -1,5 +1,6 @@
 import { Alert, Button, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+import TagsList from "./TagsList";
 function Tags() {
   const [name, setName] = useState();
   const [start, setStart] = useState();
@@ -8,13 +9,13 @@ function Tags() {
   const [loading,setLoading] = useState(false);
   const handleSet = () => {
     setLoading(true)
-    console.log(`${process.env.BASE_URL}`);
+    console.log(`${process.env.REACT_APP_BASE_URL}`);
     fetch(`${process.env.REACT_APP_BASE_URL}/user/createTag`,{
         method: 'POST',
         headers:{
             "Content-Type": "application/json"
         },
-        body:JSON.stringify({userID: sessionStorage.getItem("userID"),name, start_time:start, end_time:end})
+        body:JSON.stringify({userID: sessionStorage.getItem("userID"),name:name, start_time:start, end_time:end})
     }).then(res=>res.json()).then((data)=>{
         setLoading(false);
         setMessage(data.success);
@@ -24,9 +25,10 @@ function Tags() {
     })
   };
   return (
-    <Stack gap={4} alignItems="center" justifyContent="center" minHeight="90vh">
+    <Stack gap={4} direction="row" alignItems="center" justifyContent="center" minHeight="90vh">
+      <Stack p={4} alignItems="center" justifyContent="center" gap={4} width="100%">
       <Typography variant="h4">Generate Your Own Tags</Typography>
-      <Stack gap={4} width="50%">
+      <Stack gap={4} width="100%">
         <Stack gap={2} className="tag" alignItems="center" justifyContent="center">
           <label htmlFor="name">Name</label>
           <input
@@ -41,7 +43,7 @@ function Tags() {
             value={name}
           />
         </Stack>
-        <Stack direction="row" justifyContent="space-around">
+        <Stack direction="row" justifyContent="space-between">
           <Stack gap={2} className="tag" alignItems="center" justifyContent="center">
             <label htmlFor="start_time">Start Time</label>
             <Stack
@@ -93,19 +95,24 @@ function Tags() {
           </Stack>
         </Stack>
       </Stack>
-      <Stack>
+      <Stack >
         <Button
           variant="contained"
           color="secondary"
           disableElevation
           onClick={handleSet}
           disabled={loading}
+          sx={{width:"fit-content"}}
         >
           Create Tag
         </Button>
       </Stack>
       {message && <Alert onClose={()=>{setMessage("")}} severity="info">{message?"Created Successfully":"Try Again"}
         </Alert>}
+      </Stack>
+      <Stack width="100%" height="90vh" alignItems="center" justifyContent="center">
+        <TagsList/>
+      </Stack>
     </Stack>
   );
 }

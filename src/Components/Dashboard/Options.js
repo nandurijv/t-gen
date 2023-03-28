@@ -15,6 +15,12 @@ function Options() {
         <Svg1/>
         </motion.div>
         <Button variant="contained" color="secondary" onClick={()=>{navigate('generateSchedule')}}disableRipple disableElevation>Generate Schedule</Button>
+      </Stack> 
+      <Stack sx={{width:"100%",minHeight:"70vh",padding:"2rem"}} alignItems="center" justifyContent="center" spacing={4}>
+        <motion.div>
+        <Svg2/>
+        </motion.div>
+        <Button variant="contained" color="secondary" onClick={()=>{navigate('generateTags')}}disableRipple disableElevation>Generate Tags</Button>
       </Stack>      
     </Stack>
   )

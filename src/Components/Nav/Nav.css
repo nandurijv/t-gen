@@ -5,6 +5,9 @@
     color:white;
     background-color:rgb(62, 0, 89);
     width:100%;
+    position:sticky;
+    top:0;
+    z-index:999;
   }
   
   .nav h3{
