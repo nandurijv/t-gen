@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 
-function Generate({ setItemNumber, payload }) {
+function Generate({ setResult,setItemNumber, payload }) {
   const [loading,setLoading] = useState(false);
   const handleGen = async () => {
     setLoading(true);
@@ -15,7 +15,7 @@ function Generate({ setItemNumber, payload }) {
     }).then(res=>res.json()).then(data=>{
       console.log(data);
       setLoading(false);
-      sessionStorage.setItem("schedule",data);
+      setResult(data.data)
       setItemNumber((prev) => {
         return (prev + 1) % 4;
       });
