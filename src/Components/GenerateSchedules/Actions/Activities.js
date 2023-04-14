@@ -50,12 +50,12 @@ function Activities({ setItemNumber, setPayload }) {
       });
   }, []);
   return (
-    <Stack direction="row" alignItems="center" justifyContent="center" gap={2}>
+    <Stack width="100%"direction="row" alignItems="center" justifyContent="space-between" gap={8}>
       <Stack
         mt={2}
         width="60%"
         alignItems="left"
-        justifyContent="center"
+        justifyContent="space-between"
         overflow="scroll"
         gap={4}
       >
