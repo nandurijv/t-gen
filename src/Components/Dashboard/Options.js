@@ -1,7 +1,6 @@
 import { Button, Stack } from '@mui/material'
 import React from 'react'
 import Svg2 from '../SVGs/Svg2'
-import Svg3 from '../SVGs/Svg3'
 import Svg1 from '../SVGs/Svg1'
 import { useNavigate } from 'react-router-dom'
 import {motion} from 'framer-motion';

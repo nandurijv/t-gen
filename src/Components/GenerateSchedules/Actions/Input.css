@@ -10,7 +10,7 @@ input{
     font-weight:600;
 }
 input[type="number"]{
-    width:50% !important;
+    width:100% !important;
     height:50px;
     font-size:2rem;
 }
@@ -20,7 +20,7 @@ input[type="number"]{
 }
 .tag input{
     border:2px solid gray;
-    width:50% !important;
+    width:100% !important;
     height:50px;
     font-family:'Poppins';
     font-weight:600;

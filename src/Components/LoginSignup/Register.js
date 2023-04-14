@@ -200,7 +200,7 @@ function Register({alert,alertType, setAlert, setAlertType, setAlertMessage}) {
             "Submit"
           )}
         </Button>
-        {alert?<Button variant="contained" disableElevation size="small" color="warning" onClick={resendMail}>{loading ? (
+        {alert?<Button variant="contained" disableElevation size="small" color="warning" onClick={resendMail}>{loading2 ? (
             <CircularProgress size={20} sx={{ color: "white" }} />
           ) : (
             "Resend Mail"
